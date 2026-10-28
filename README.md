@@ -17,7 +17,7 @@ Loose TOS (You get called a loser clown for breaking these but nothing else):
 
 Links:
 	-Official webpage: https://www.chaonic.pages.dev
-	-Dev page: https://www.xer0.pages.dev
+	-Dev page: https://xer0.pages.dev
 	-Discord: https://discord.gg/WTmkUKcAK
 
 Legal issues:
