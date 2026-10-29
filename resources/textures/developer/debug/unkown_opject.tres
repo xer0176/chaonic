@@ -1,0 +1,13 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bmi7rbqcae7vg"]
+
+[ext_resource type="Texture2D" uid="uid://b4rde7h3kuorc" path="res://resources/textures/developer/debug/missing_model.png" id="1_jnfhl"]
+
+[resource]
+shading_mode = 2
+albedo_texture = ExtResource("1_jnfhl")
+metallic_specular = 0.0
+ao_enabled = true
+uv1_scale = Vector3(10, 10, 10)
+uv1_triplanar = true
+uv1_triplanar_sharpness = 150.0
+texture_filter = 0

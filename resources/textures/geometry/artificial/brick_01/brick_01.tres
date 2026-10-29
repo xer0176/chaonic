@@ -1,0 +1,21 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://coywtdpcdd0n3"]
+
+[ext_resource type="Texture2D" uid="uid://spjr4sqodwkb" path="res://resources/textures/geometry/artificial/brick_01/brick_01_texture.jpg" id="1_j0o4u"]
+[ext_resource type="Texture2D" uid="uid://cskh3383ek6xd" path="res://resources/textures/geometry/artificial/brick_01/brick_01_occlusion.jpg" id="2_w2spr"]
+[ext_resource type="Texture2D" uid="uid://bp2rdaf0ljbc0" path="res://resources/textures/geometry/artificial/brick_01/brick_01_normals.jpg" id="3_j0o4u"]
+[ext_resource type="Texture2D" uid="uid://rnci4fl8i20p" path="res://resources/textures/geometry/artificial/brick_01/brick_01_roughness.jpg" id="4_j46g1"]
+
+[resource]
+shading_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_j0o4u")
+metallic_specular = 0.0
+roughness_texture = ExtResource("4_j46g1")
+ao_enabled = true
+ao_light_affect = 1.0
+ao_texture = ExtResource("2_w2spr")
+heightmap_enabled = true
+heightmap_texture = ExtResource("3_j0o4u")
+detail_normal = ExtResource("3_j0o4u")
+uv1_scale = Vector3(0.3, 0.3, 0.3)
+uv1_triplanar = true

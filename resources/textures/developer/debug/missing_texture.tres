@@ -1,0 +1,13 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bh6imi65l38fa"]
+
+[ext_resource type="Texture2D" uid="uid://nmldy8503ikv" path="res://resources/textures/developer/debug/missing_texture.png" id="1_dynu1"]
+
+[resource]
+shading_mode = 2
+albedo_texture = ExtResource("1_dynu1")
+metallic_specular = 0.0
+ao_enabled = true
+uv1_scale = Vector3(10, 10, 10)
+uv1_triplanar = true
+uv1_triplanar_sharpness = 150.0
+texture_filter = 0

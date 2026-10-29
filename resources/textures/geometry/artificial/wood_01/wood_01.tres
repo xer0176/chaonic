@@ -1,0 +1,18 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bhjb5ve77enmj"]
+
+[ext_resource type="Texture2D" uid="uid://drv6qavwdslbs" path="res://resources/textures/geometry/artificial/wood_01/wood_01_.texture.jpg" id="1_su1av"]
+[ext_resource type="Texture2D" uid="uid://drx5ly141yw7p" path="res://resources/textures/geometry/artificial/wood_01/wood_01_.roughness.jpg" id="3_hy72d"]
+[ext_resource type="Texture2D" uid="uid://c2687i2t1a24r" path="res://resources/textures/geometry/artificial/wood_01/wood_01_.displacement.jpg" id="3_stg01"]
+[ext_resource type="Texture2D" uid="uid://bp2rdaf0ljbc0" path="res://resources/textures/geometry/artificial/brick_01/brick_01_normals.jpg" id="3_vmdcv"]
+
+[resource]
+shading_mode = 2
+albedo_texture = ExtResource("1_su1av")
+metallic = 1.0
+metallic_specular = 0.0
+metallic_texture = ExtResource("3_stg01")
+roughness_texture = ExtResource("3_hy72d")
+ao_light_affect = 1.0
+detail_normal = ExtResource("3_vmdcv")
+uv1_scale = Vector3(0.3, 0.3, 0.3)
+uv1_triplanar = true
