@@ -1,0 +1,541 @@
+[gd_scene format=3 uid="uid://br7fbyvsg812p"]
+
+[ext_resource type="AudioStream" uid="uid://bq4r1xg3ti3y3" path="res://resources/sounds/ambient/wind_01.wav" id="1_txisc"]
+[ext_resource type="Texture2D" uid="uid://cun042kd3tqyo" path="res://resources/textures/geometry/skybox/sky_03.jpg" id="2_15ovm"]
+[ext_resource type="Script" uid="uid://b6ni6skw27fjl" path="res://scripts/sky_spin.gd" id="3_xjgu1"]
+[ext_resource type="Texture2D" uid="uid://spjr4sqodwkb" path="res://resources/textures/geometry/artificial/brick_01/brick_01_texture.jpg" id="4_52w74"]
+[ext_resource type="Texture2D" uid="uid://cskh3383ek6xd" path="res://resources/textures/geometry/artificial/brick_01/brick_01_occlusion.jpg" id="5_m6uf1"]
+[ext_resource type="Texture2D" uid="uid://bp2rdaf0ljbc0" path="res://resources/textures/geometry/artificial/brick_01/brick_01_normals.jpg" id="6_4u07l"]
+[ext_resource type="Texture2D" uid="uid://rnci4fl8i20p" path="res://resources/textures/geometry/artificial/brick_01/brick_01_roughness.jpg" id="7_7x4i5"]
+[ext_resource type="Material" uid="uid://coywtdpcdd0n3" path="res://resources/textures/geometry/artificial/brick_01/brick_01.tres" id="8_qy3ir"]
+[ext_resource type="Material" uid="uid://bh6imi65l38fa" path="res://resources/textures/developer/debug/missing_texture.tres" id="9_uj6pv"]
+[ext_resource type="Script" uid="uid://dlqfjhpreou2p" path="res://scripts/impact.gd" id="10_2n80h"]
+[ext_resource type="Texture2D" uid="uid://drv6qavwdslbs" path="res://resources/textures/geometry/artificial/wood_01/wood_01_.texture.jpg" id="11_f1fq2"]
+[ext_resource type="Texture2D" uid="uid://btnxja43u5am6" path="res://resources/textures/geometry/artificial/wood_01/wood_01_.normals.jpg" id="12_iom4a"]
+[ext_resource type="Texture2D" uid="uid://drx5ly141yw7p" path="res://resources/textures/geometry/artificial/wood_01/wood_01_.roughness.jpg" id="13_usmyc"]
+[ext_resource type="AudioStream" uid="uid://cxw3tvyinimgl" path="res://resources/sounds/objects/destruction/wood_break_01.wav" id="14_dmiv1"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_vpynx"]
+panorama = ExtResource("2_15ovm")
+
+[sub_resource type="Sky" id="Sky_nvl01"]
+sky_material = SubResource("PanoramaSkyMaterial_vpynx")
+
+[sub_resource type="Environment" id="Environment_6usrx"]
+background_mode = 2
+background_energy_multiplier = 0.2
+sky = SubResource("Sky_nvl01")
+ambient_light_energy = 0.0
+sdfgi_enabled = true
+sdfgi_use_occlusion = true
+sdfgi_energy = 0.5
+fog_enabled = true
+fog_light_color = Color(0.23098162, 0.25398114, 0.28976774, 1)
+fog_light_energy = 0.5
+fog_density = 0.004
+fog_sky_affect = 0.34
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tgnot"]
+shading_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("4_52w74")
+metallic_specular = 0.0
+roughness_texture = ExtResource("7_7x4i5")
+ao_enabled = true
+ao_light_affect = 1.0
+ao_texture = ExtResource("5_m6uf1")
+heightmap_enabled = true
+heightmap_texture = ExtResource("6_4u07l")
+detail_normal = ExtResource("6_4u07l")
+uv1_scale = Vector3(0.3, 0.3, 0.3)
+uv1_triplanar = true
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_wq1vs"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_psmab"]
+size = Vector3(0.2, 0.8, 0.2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sx5mf"]
+albedo_texture = ExtResource("11_f1fq2")
+roughness_texture = ExtResource("13_usmyc")
+roughness_texture_channel = 4
+normal_enabled = true
+normal_texture = ExtResource("12_iom4a")
+ao_enabled = true
+heightmap_enabled = true
+heightmap_scale = 1.0
+uv1_scale = Vector3(0.4, 0.4, 0.4)
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_oj76p"]
+material = SubResource("StandardMaterial3D_sx5mf")
+size = Vector3(0.2, 0.8, 0.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_r6gc4"]
+size = Vector3(1.2, 0.2, 1.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_j67ig"]
+material = SubResource("StandardMaterial3D_sx5mf")
+size = Vector3(1.2, 0.2, 1.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_c0cvl"]
+size = Vector3(0.2, 1.5, 1.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_aabld"]
+material = SubResource("StandardMaterial3D_sx5mf")
+size = Vector3(0.2, 1.5, 1.2)
+
+[node name="Node3D" type="Node3D" unique_id=1393522540]
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=413138914]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 443, 411, 0)
+stream = ExtResource("1_txisc")
+volume_db = 5.0
+unit_size = 64.86
+autoplay = true
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=377626146]
+transform = Transform3D(-0.76939946, -0.41906947, -0.48208424, 1.3195763e-07, -0.75470954, 0.656059, -0.63876796, 0.50477135, 0.5806732, 0, 0, 0)
+light_color = Color(0.60731804, 0.66563493, 0.73383886, 1)
+light_energy = 0.786
+light_indirect_energy = 2.204
+light_volumetric_fog_energy = 1.085
+light_specular = 2.467
+shadow_enabled = true
+shadow_bias = 0.0
+shadow_normal_bias = 1.5
+shadow_reverse_cull_face = true
+shadow_opacity = 0.27
+shadow_blur = 2.871
+directional_shadow_max_distance = 400.0
+directional_shadow_pancake_size = 100.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1161534625]
+environment = SubResource("Environment_6usrx")
+script = ExtResource("3_xjgu1")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=374079548]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.9, -4.2, -3.5)
+use_collision = true
+size = Vector3(29.2, 2, 52)
+material = SubResource("StandardMaterial3D_tgnot")
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="." unique_id=1887781488]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 78, -10.230673, 4.5)
+use_collision = true
+size = Vector3(25, 3.6000001, 20)
+material = ExtResource("8_qy3ir")
+
+[node name="CSGBox3D11" type="CSGBox3D" parent="." unique_id=1624777094]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49, -11.930672, 4.5)
+use_collision = true
+size = Vector3(33, 7, 20)
+material = ExtResource("8_qy3ir")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2131689687]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.2, -1.2306716, -5.0149994)
+material_override = ExtResource("9_uj6pv")
+mesh = SubResource("CapsuleMesh_wq1vs")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1377371061]
+transform = Transform3D(0.7071068, 0.18301271, -0.6830127, 0, 0.9659259, 0.25881907, 0.7071068, -0.18301271, 0.6830127, 29.29815, 0.9296839, 2.551928)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="." unique_id=870066656]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.4, 11.3, -14.5)
+use_collision = true
+size = Vector3(16.2, 29, 30)
+material = ExtResource("8_qy3ir")
+
+[node name="CSGBox3D16" type="CSGBox3D" parent="." unique_id=1734922603]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 79.9, 85.8)
+use_collision = true
+size = Vector3(51, 73.6, 16.6)
+material = ExtResource("8_qy3ir")
+
+[node name="Node3D" type="Node3D" parent="." unique_id=659053786]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.6, -3.8000004, -5.4)
+script = ExtResource("10_2n80h")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="Node3D" unique_id=1092517605]
+can_sleep = false
+continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 4
+
+[node name="Generic6DOFJoint3D" type="Generic6DOFJoint3D" parent="Node3D/RigidBody3D" unique_id=643089719]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3999996, 0)
+node_a = NodePath("..")
+node_b = NodePath("../../RigidBody3D5")
+linear_limit_x/softness = 0.01
+linear_limit_y/softness = 0.01
+linear_limit_z/softness = 0.01
+linear_motor_x/force_limit = 30.0
+linear_motor_y/force_limit = 30.0
+linear_motor_z/force_limit = 30.0
+angular_limit_x/softness = 0.01
+angular_limit_x/force_limit = 1.0
+angular_limit_y/softness = 0.01
+angular_limit_y/force_limit = 1.0
+angular_limit_z/softness = 0.01
+angular_limit_z/force_limit = 1.0
+angular_motor_x/force_limit = 1.0
+angular_motor_y/force_limit = 1.0
+angular_motor_z/force_limit = 1.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/RigidBody3D" unique_id=1806801119]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_psmab")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/RigidBody3D" unique_id=49840330]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("BoxMesh_oj76p")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Node3D/RigidBody3D" unique_id=8361223]
+stream = ExtResource("14_dmiv1")
+
+[node name="RigidBody3D2" type="RigidBody3D" parent="Node3D" unique_id=618964289]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+can_sleep = false
+continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 4
+
+[node name="Generic6DOFJoint3D" type="Generic6DOFJoint3D" parent="Node3D/RigidBody3D2" unique_id=1038471512]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3999996, 0)
+node_a = NodePath("..")
+node_b = NodePath("../../RigidBody3D5")
+linear_limit_x/softness = 0.01
+linear_limit_y/softness = 0.01
+linear_limit_z/softness = 0.01
+linear_motor_x/force_limit = 30.0
+linear_motor_y/force_limit = 30.0
+linear_motor_z/force_limit = 30.0
+angular_limit_x/softness = 0.01
+angular_limit_x/force_limit = 1.0
+angular_limit_y/softness = 0.01
+angular_limit_y/force_limit = 1.0
+angular_limit_z/softness = 0.01
+angular_limit_z/force_limit = 1.0
+angular_motor_x/force_limit = 1.0
+angular_motor_y/force_limit = 1.0
+angular_motor_z/force_limit = 1.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/RigidBody3D2" unique_id=1480410409]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_psmab")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/RigidBody3D2" unique_id=486996316]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("BoxMesh_oj76p")
+
+[node name="RigidBody3D3" type="RigidBody3D" parent="Node3D" unique_id=2109857322]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+can_sleep = false
+continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 4
+
+[node name="Generic6DOFJoint3D" type="Generic6DOFJoint3D" parent="Node3D/RigidBody3D3" unique_id=1324367191]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3999996, 0)
+node_a = NodePath("..")
+node_b = NodePath("../../RigidBody3D5")
+linear_limit_x/softness = 0.01
+linear_limit_y/softness = 0.01
+linear_limit_z/softness = 0.01
+linear_motor_x/force_limit = 30.0
+linear_motor_y/force_limit = 30.0
+linear_motor_z/force_limit = 30.0
+angular_limit_x/softness = 0.01
+angular_limit_x/force_limit = 1.0
+angular_limit_y/softness = 0.01
+angular_limit_y/force_limit = 1.0
+angular_limit_z/softness = 0.01
+angular_limit_z/force_limit = 1.0
+angular_motor_x/force_limit = 1.0
+angular_motor_y/force_limit = 1.0
+angular_motor_z/force_limit = 1.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/RigidBody3D3" unique_id=1368899139]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_psmab")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/RigidBody3D3" unique_id=544466973]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("BoxMesh_oj76p")
+
+[node name="RigidBody3D4" type="RigidBody3D" parent="Node3D" unique_id=868727613]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
+can_sleep = false
+continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/RigidBody3D4" unique_id=28213082]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_psmab")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/RigidBody3D4" unique_id=1857784504]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("BoxMesh_oj76p")
+
+[node name="Generic6DOFJoint3D" type="Generic6DOFJoint3D" parent="Node3D/RigidBody3D4" unique_id=1293970571]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3999996, 0)
+node_a = NodePath("..")
+node_b = NodePath("../../RigidBody3D5")
+linear_limit_x/softness = 0.01
+linear_limit_y/softness = 0.01
+linear_limit_z/softness = 0.01
+linear_motor_x/force_limit = 30.0
+linear_motor_y/force_limit = 30.0
+linear_motor_z/force_limit = 30.0
+angular_limit_x/softness = 0.01
+angular_limit_x/force_limit = 1.0
+angular_limit_y/softness = 0.01
+angular_limit_y/force_limit = 1.0
+angular_limit_z/softness = 0.01
+angular_limit_z/force_limit = 1.0
+angular_motor_x/force_limit = 1.0
+angular_motor_y/force_limit = 1.0
+angular_motor_z/force_limit = 1.0
+
+[node name="RigidBody3D5" type="RigidBody3D" parent="Node3D" unique_id=399361312]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.5, 0.5)
+can_sleep = false
+continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/RigidBody3D5" unique_id=1118847936]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_r6gc4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/RigidBody3D5" unique_id=949466002]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("BoxMesh_j67ig")
+
+[node name="RigidBody3D6" type="RigidBody3D" parent="Node3D" unique_id=1838174933]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.35, 0.5)
+can_sleep = false
+continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 4
+
+[node name="Generic6DOFJoint3D" type="Generic6DOFJoint3D" parent="Node3D/RigidBody3D6" unique_id=1993040708]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -0.95000076, 0.5)
+node_a = NodePath("..")
+node_b = NodePath("../../RigidBody3D5")
+linear_limit_x/softness = 0.01
+linear_limit_y/softness = 0.01
+linear_limit_z/softness = 0.01
+linear_motor_x/force_limit = 30.0
+linear_motor_y/force_limit = 30.0
+linear_motor_z/force_limit = 30.0
+angular_limit_x/softness = 0.01
+angular_limit_x/force_limit = 1.0
+angular_limit_y/softness = 0.01
+angular_limit_y/force_limit = 1.0
+angular_limit_z/softness = 0.01
+angular_limit_z/force_limit = 1.0
+angular_motor_x/force_limit = 1.0
+angular_motor_y/force_limit = 1.0
+angular_motor_z/force_limit = 1.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/RigidBody3D6" unique_id=1963240386]
+shape = SubResource("BoxShape3D_c0cvl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/RigidBody3D6" unique_id=1416006080]
+mesh = SubResource("BoxMesh_aabld")
+
+[node name="Node3D2" type="Node3D" parent="." unique_id=476259021]
+transform = Transform3D(-0.10660586, -0.60214144, 0.7912401, 0.21201223, -0.7912401, -0.57357645, 0.971435, 0.10660596, 0.21201217, 57.4, 1513.4, -27.199997)
+script = ExtResource("10_2n80h")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="Node3D2" unique_id=2014345173]
+can_sleep = false
+continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 4
+
+[node name="Generic6DOFJoint3D" type="Generic6DOFJoint3D" parent="Node3D2/RigidBody3D" unique_id=722412162]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3999996, 0)
+node_a = NodePath("..")
+node_b = NodePath("../../RigidBody3D5")
+linear_limit_x/softness = 0.01
+linear_limit_y/softness = 0.01
+linear_limit_z/softness = 0.01
+linear_motor_x/force_limit = 30.0
+linear_motor_y/force_limit = 30.0
+linear_motor_z/force_limit = 30.0
+angular_limit_x/softness = 0.01
+angular_limit_x/force_limit = 1.0
+angular_limit_y/softness = 0.01
+angular_limit_y/force_limit = 1.0
+angular_limit_z/softness = 0.01
+angular_limit_z/force_limit = 1.0
+angular_motor_x/force_limit = 1.0
+angular_motor_y/force_limit = 1.0
+angular_motor_z/force_limit = 1.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D2/RigidBody3D" unique_id=771564241]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_psmab")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D2/RigidBody3D" unique_id=1678697741]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("BoxMesh_oj76p")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Node3D2/RigidBody3D" unique_id=419411344]
+stream = ExtResource("14_dmiv1")
+
+[node name="RigidBody3D2" type="RigidBody3D" parent="Node3D2" unique_id=576400652]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+can_sleep = false
+continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 4
+
+[node name="Generic6DOFJoint3D" type="Generic6DOFJoint3D" parent="Node3D2/RigidBody3D2" unique_id=1357171237]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3999996, 0)
+node_a = NodePath("..")
+node_b = NodePath("../../RigidBody3D5")
+linear_limit_x/softness = 0.01
+linear_limit_y/softness = 0.01
+linear_limit_z/softness = 0.01
+linear_motor_x/force_limit = 30.0
+linear_motor_y/force_limit = 30.0
+linear_motor_z/force_limit = 30.0
+angular_limit_x/softness = 0.01
+angular_limit_x/force_limit = 1.0
+angular_limit_y/softness = 0.01
+angular_limit_y/force_limit = 1.0
+angular_limit_z/softness = 0.01
+angular_limit_z/force_limit = 1.0
+angular_motor_x/force_limit = 1.0
+angular_motor_y/force_limit = 1.0
+angular_motor_z/force_limit = 1.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D2/RigidBody3D2" unique_id=405640654]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_psmab")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D2/RigidBody3D2" unique_id=1926543507]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("BoxMesh_oj76p")
+
+[node name="RigidBody3D3" type="RigidBody3D" parent="Node3D2" unique_id=1460061588]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+can_sleep = false
+continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 4
+
+[node name="Generic6DOFJoint3D" type="Generic6DOFJoint3D" parent="Node3D2/RigidBody3D3" unique_id=75149272]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3999996, 0)
+node_a = NodePath("..")
+node_b = NodePath("../../RigidBody3D5")
+linear_limit_x/softness = 0.01
+linear_limit_y/softness = 0.01
+linear_limit_z/softness = 0.01
+linear_motor_x/force_limit = 30.0
+linear_motor_y/force_limit = 30.0
+linear_motor_z/force_limit = 30.0
+angular_limit_x/softness = 0.01
+angular_limit_x/force_limit = 1.0
+angular_limit_y/softness = 0.01
+angular_limit_y/force_limit = 1.0
+angular_limit_z/softness = 0.01
+angular_limit_z/force_limit = 1.0
+angular_motor_x/force_limit = 1.0
+angular_motor_y/force_limit = 1.0
+angular_motor_z/force_limit = 1.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D2/RigidBody3D3" unique_id=780565769]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_psmab")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D2/RigidBody3D3" unique_id=76762507]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("BoxMesh_oj76p")
+
+[node name="RigidBody3D4" type="RigidBody3D" parent="Node3D2" unique_id=1283258493]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
+can_sleep = false
+continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D2/RigidBody3D4" unique_id=157539083]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_psmab")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D2/RigidBody3D4" unique_id=672889671]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("BoxMesh_oj76p")
+
+[node name="Generic6DOFJoint3D" type="Generic6DOFJoint3D" parent="Node3D2/RigidBody3D4" unique_id=1214224447]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3999996, 0)
+node_a = NodePath("..")
+node_b = NodePath("../../RigidBody3D5")
+linear_limit_x/softness = 0.01
+linear_limit_y/softness = 0.01
+linear_limit_z/softness = 0.01
+linear_motor_x/force_limit = 30.0
+linear_motor_y/force_limit = 30.0
+linear_motor_z/force_limit = 30.0
+angular_limit_x/softness = 0.01
+angular_limit_x/force_limit = 1.0
+angular_limit_y/softness = 0.01
+angular_limit_y/force_limit = 1.0
+angular_limit_z/softness = 0.01
+angular_limit_z/force_limit = 1.0
+angular_motor_x/force_limit = 1.0
+angular_motor_y/force_limit = 1.0
+angular_motor_z/force_limit = 1.0
+
+[node name="RigidBody3D5" type="RigidBody3D" parent="Node3D2" unique_id=1369207266]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.5, 0.5)
+can_sleep = false
+continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D2/RigidBody3D5" unique_id=2105929783]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_r6gc4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D2/RigidBody3D5" unique_id=330655783]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("BoxMesh_j67ig")
+
+[node name="RigidBody3D6" type="RigidBody3D" parent="Node3D2" unique_id=1774313548]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.35, 0.5)
+can_sleep = false
+continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 4
+
+[node name="Generic6DOFJoint3D" type="Generic6DOFJoint3D" parent="Node3D2/RigidBody3D6" unique_id=56181808]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -0.95000076, 0.5)
+node_a = NodePath("..")
+node_b = NodePath("../../RigidBody3D5")
+linear_limit_x/softness = 0.01
+linear_limit_y/softness = 0.01
+linear_limit_z/softness = 0.01
+linear_motor_x/force_limit = 30.0
+linear_motor_y/force_limit = 30.0
+linear_motor_z/force_limit = 30.0
+angular_limit_x/softness = 0.01
+angular_limit_x/force_limit = 1.0
+angular_limit_y/softness = 0.01
+angular_limit_y/force_limit = 1.0
+angular_limit_z/softness = 0.01
+angular_limit_z/force_limit = 1.0
+angular_motor_x/force_limit = 1.0
+angular_motor_y/force_limit = 1.0
+angular_motor_z/force_limit = 1.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D2/RigidBody3D6" unique_id=632096560]
+shape = SubResource("BoxShape3D_c0cvl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D2/RigidBody3D6" unique_id=2128466776]
+mesh = SubResource("BoxMesh_aabld")
